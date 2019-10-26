@@ -1,14 +1,11 @@
 // Modules
 const { app, BrowserWindow } = require('electron');
-// const colors = require('colors');
-const bcrypt = require('bcrypt');
 
-bcrypt.hash('myPlainTextPassword', 10, (err, hash) => {
-    debugger;
-    console.log(hash);
-});
+console.log('checking ready', app.isReady());
 
-// console.log(colors.rainbow('Hello!!!'));
+setTimeout(() => {
+    console.log('checking ready', app.isReady());
+}, 2000);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -30,13 +27,32 @@ function createWindow() {
 
     // Listen for window being closed
     mainWindow.on('closed', () => {
-        debugger;
         mainWindow = null;
     });
 }
 
 // Electron `app` is ready
-app.on('ready', createWindow);
+app.on('ready', () => {
+    console.log('desktop path', app.getPath('desktop'));
+    console.log('userData', app.getPath('userData'));
+    createWindow();
+});
+
+app.on('before-quit', e => {
+    // console.log('prevent from quiting');
+    // e.preventDefault();
+    // app.quit();
+});
+
+app.on('browser-window-blur', () => {
+    console.log('unfocus');
+    // setTimeout(app.quit, 3000);
+    // setTimeout(app.hide, 3000);
+});
+
+app.on('browser-window-focus', () => {
+    console.log('focus');
+});
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on('window-all-closed', () => {
