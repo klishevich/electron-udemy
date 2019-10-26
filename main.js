@@ -16,11 +16,14 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1000,
         height: 600,
-        webPreferences: { nodeIntegration: true }
+        webPreferences: { nodeIntegration: true },
+        show: true,
+        backgroundColor: '#2C92F9'
     });
 
     // Load index.html into the new BrowserWindow
     mainWindow.loadFile('index.html');
+    // mainWindow.loadURL('http://busation.ru');
 
     // Open DevTools - Remove for PRODUCTION!
     mainWindow.webContents.openDevTools();
@@ -29,6 +32,11 @@ function createWindow() {
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
+
+    // once - discard trigger after once
+    // mainWindow.once('ready-to-show', () => {
+    //     mainWindow.show();
+    // });
 }
 
 // Electron `app` is ready
