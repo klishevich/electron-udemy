@@ -10,6 +10,7 @@ setTimeout(() => {
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let secondWindow;
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
@@ -21,22 +22,45 @@ function createWindow() {
         backgroundColor: '#2C92F9'
     });
 
+    secondWindow = new BrowserWindow({
+        width: 500,
+        height: 300,
+        webPreferences: { nodeIntegration: true },
+        parent: mainWindow,
+        modal: true,
+        show: false
+    });
+
     // Load index.html into the new BrowserWindow
     mainWindow.loadFile('index.html');
     // mainWindow.loadURL('http://busation.ru');
 
+    secondWindow.loadFile('index2.html');
+
     // Open DevTools - Remove for PRODUCTION!
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     // Listen for window being closed
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
 
+    secondWindow.on('closed', () => {
+        secondWindow = null;
+    });
+
     // once - discard trigger after once
     // mainWindow.once('ready-to-show', () => {
     //     mainWindow.show();
     // });
+
+    setTimeout(() => {
+        secondWindow.show();
+        setTimeout(() => {
+            secondWindow.close();
+            secondWindow = null;
+        }, 3000);
+    }, 2000);
 }
 
 // Electron `app` is ready
