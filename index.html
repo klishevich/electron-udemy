@@ -8,6 +8,9 @@
             body {
                 background-color: #2C92F9;
                 height: 100%;
+                user-select: none;
+                -webkit-app-region: drag;
+                padding-top: 20px;
             }
         </style>
     </head>
@@ -26,7 +29,9 @@
                 document.write(process.versions.electron);
             </script></strong
         >.
-
+        <br/>
+        <br/>
+        <input type="range" name="range" min="0" max="10" style="-webkit-app-region: no-drag;">
         <script>
             // You can also require other files to run in this process
             require('./renderer.js');

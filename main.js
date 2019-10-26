@@ -19,7 +19,9 @@ function createWindow() {
         height: 600,
         webPreferences: { nodeIntegration: true },
         show: true,
-        backgroundColor: '#2C92F9'
+        backgroundColor: '#2C92F9',
+        // frame: false,
+        titleBarStyle: 'hidden'
     });
 
     secondWindow = new BrowserWindow({
@@ -54,13 +56,13 @@ function createWindow() {
     //     mainWindow.show();
     // });
 
-    setTimeout(() => {
-        secondWindow.show();
-        setTimeout(() => {
-            secondWindow.close();
-            secondWindow = null;
-        }, 3000);
-    }, 2000);
+    // setTimeout(() => {
+    //     secondWindow.show();
+    //     setTimeout(() => {
+    //         secondWindow.close();
+    //         secondWindow = null;
+    //     }, 3000);
+    // }, 2000);
 }
 
 // Electron `app` is ready
