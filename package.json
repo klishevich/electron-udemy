@@ -4,9 +4,11 @@
   "description": "Master Electron Course Code",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "watch": "nodemon --exec 'electron .'",
-    "reset": "git reset --hard"
+    "start": "nodemon --exec 'electron .'",
+    "inspect": "electron --inspect-brk=5858 .",
+    "start2": "electron .",
+    "reset": "git reset --hard",
+    "electron-rebuild": "electron-rebuild"
   },
   "repository": "https://github.com/stackacademytv/master-electron",
   "keywords": [

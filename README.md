@@ -1,7 +1,7 @@
 # Master Electron - Course Code
 
-Demo project modified from: https://github.com/electron/electron-quick-start
+To rebuild bycript run:
+` ./node_modules/.bin/electron-rebuild`
 
-*Modified for improved screen real estate and for the sake of consistent versioning.*
-
-![Master Electron](https://raw.githubusercontent.com/stackacademytv/master-electron/master/splash.png)
+Inspect
+chrome://inspect/

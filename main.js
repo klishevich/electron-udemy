@@ -4,6 +4,7 @@ const { app, BrowserWindow } = require('electron');
 const bcrypt = require('bcrypt');
 
 bcrypt.hash('myPlainTextPassword', 10, (err, hash) => {
+    debugger;
     console.log(hash);
 });
 
@@ -29,6 +30,7 @@ function createWindow() {
 
     // Listen for window being closed
     mainWindow.on('closed', () => {
+        debugger;
         mainWindow = null;
     });
 }
