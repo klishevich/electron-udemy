@@ -75,3 +75,21 @@ ses.cookies.remove('https://my.site', 'cookie1', err => {
     console.log('some log');
 });
 ```
+
+### Dialog
+
+```javascript
+const { dialog } = require('electron');
+
+mainWindow.webContens.on('did-finish-load', () => {
+    dialog.showOpenDialog(mainWindow, {
+        //...
+    });
+});
+```
+
+#### save dialog
+
+dialog.showSaveDialog
+
+dialog.showMessageBox
