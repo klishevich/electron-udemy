@@ -113,3 +113,9 @@ mainWindow.webContents.on('context-menu', e => {
     contextMenu.popup();
 });
 ```
+
+### Tray
+
+System tray icon
+
+tray.setContextMenu(trayMenu)
