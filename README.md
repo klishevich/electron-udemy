@@ -138,3 +138,22 @@ Arrays and buffers are copied over IPC!!!
 
 ### window (BrowserWindowProxy)
 
+### WebFrame
+
+in renderer
+
+```javascript
+const { webFrame } = require('electron');
+
+const zoomUp = () => {
+    webFrame.setZoomFactor(webFrame.getZoomFactor() + 1);
+};
+```
+
+```javascript
+webFrame.getResourceUsage();
+```
+
+### desktopCapturer
+
+## IPC Inter-Process Communication

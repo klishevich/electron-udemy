@@ -1,5 +1,5 @@
 // Modules
-const { app, BrowserWindow, webContents, session, Menu, MenuItem } = require('electron');
+const { app, BrowserWindow, webContents, session, Menu, MenuItem, ipcMain } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 
 global['myVar'] = 'sdfsdfs';
@@ -29,6 +29,15 @@ mainMenu.append(menuItem1);
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
+    ipcMain.on('channel1', (e, args) => {
+        console.log(args);
+        e.sender.send('channel1-resp', 'message received');
+    });
+
+    ipcMain.on('sync-message', (e, args) => {
+        console.log(args);
+        e.returnValue = 'A sync response';
+    });
     let mainWindowState = windowStateKeeper({
         defaultWidth: 1000,
         defaultHeight: 600
@@ -46,6 +55,13 @@ function createWindow() {
         backgroundColor: '#2C92F9'
         // frame: false,
         // titleBarStyle: 'hidden'
+    });
+
+    mainWindow.webContents.on('did-finish-load', e => {
+        mainWindow.webContents.send('channel1-resp', {
+            name: 'you have mail',
+            email: 'email@email.com'
+        });
     });
 
     const ses = mainWindow.webContents.session;
