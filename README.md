@@ -134,3 +134,7 @@ electron.powerMonitor.on('suspend', e => {
 
 Arrays and buffers are copied over IPC!!!
 
+### Remote module
+
+### window (BrowserWindowProxy)
+
