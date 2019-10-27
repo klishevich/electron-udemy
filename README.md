@@ -1,5 +1,7 @@
 # Master Electron - Course Code
 
+## Main Proccess
+
 ### To rebuild bycript run:
 
 `./node_modules/.bin/electron-rebuild`
@@ -127,3 +129,8 @@ electron.powerMonitor.on('suspend', e => {
     console.log('saving file');
 });
 ```
+
+## Renderer Proccess
+
+Arrays and buffers are copied over IPC!!!
+
