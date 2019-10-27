@@ -1,5 +1,6 @@
 // Modules
 const { app, BrowserWindow } = require('electron');
+const windowStateKeeper = require('electron-window-state');
 
 console.log('checking ready', app.isReady());
 
@@ -14,9 +15,16 @@ let secondWindow;
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
+    let mainWindowState = windowStateKeeper({
+        defaultWidth: 1000,
+        defaultHeight: 600
+    });
+
     mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 600,
+        x: mainWindowState.x,
+        y: mainWindowState.y,
+        width: mainWindowState.width,
+        height: mainWindowState.height,
         minWidth: 300,
         minHeight: 150,
         webPreferences: { nodeIntegration: true },
@@ -25,6 +33,8 @@ function createWindow() {
         // frame: false,
         titleBarStyle: 'hidden'
     });
+
+    mainWindowState.manage(mainWindow);
 
     // console.log('mainWindow.id', mainWindow.id);
 
