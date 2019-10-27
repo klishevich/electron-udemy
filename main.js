@@ -38,6 +38,14 @@ function createWindow() {
     console.log('ses', ses);
     const defaultSession = session.defaultSession;
 
+    defaultSession.on('will-download', (e, downloadItem, webContents) => {
+        console.log('Starting download');
+        const name = downloadItem.getFilename();
+        console.log(downloadItem.getTotalBytes());
+
+        downloadItem.setSavePath(app.getPath('desktop') + `/${name}`);
+    });
+
     console.log(Object.is(ses, defaultSession));
 
     mainWindowState.manage(mainWindow);

@@ -71,5 +71,7 @@ ses.cookies.get({ name: 'cookie1' }, (err, cookies) => {
 #### remove cookie
 
 ```javascript
-ses.cookies.remove('https://my.site', 'cookie1');
+ses.cookies.remove('https://my.site', 'cookie1', err => {
+    console.log('some log');
+});
 ```
