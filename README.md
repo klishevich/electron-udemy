@@ -119,3 +119,11 @@ mainWindow.webContents.on('context-menu', e => {
 System tray icon
 
 tray.setContextMenu(trayMenu)
+
+### powerMonitor
+
+```javascript
+electron.powerMonitor.on('suspend', e => {
+    console.log('saving file');
+});
+```
