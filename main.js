@@ -1,5 +1,5 @@
 // Modules
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, webContents } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 
 console.log('checking ready', app.isReady());
@@ -29,9 +29,9 @@ function createWindow() {
         minHeight: 150,
         webPreferences: { nodeIntegration: true },
         show: true,
-        backgroundColor: '#2C92F9',
+        backgroundColor: '#2C92F9'
         // frame: false,
-        titleBarStyle: 'hidden'
+        // titleBarStyle: 'hidden'
     });
 
     mainWindowState.manage(mainWindow);
@@ -47,6 +47,53 @@ function createWindow() {
 
     // Load index.html into the new BrowserWindow
     mainWindow.loadFile('index.html');
+    // mainWindow.loadURL('https://httpbin.org/basic-auth/user/passwd');
+
+    let contents = mainWindow.webContents;
+    // console.log('contents 1', contents);
+    // console.log('contents 2', webContents.getAllWebContents());
+
+    contents.on('context-menu', (e, params) => {
+        // console.log(`Context menu opened on:${params.mediaType} at x:${params.x}, y:${params.y}`);
+        console.log(`User selected text: ${params.selectionText}`);
+        console.log(`Can be copied: ${params.editFlags.canCopy}`);
+        const selectedText = params.selectionText;
+        contents.executeJavaScript(`alert("${selectedText}")`);
+    });
+
+    // contents.on('media-started-playing', () => {
+    //     console.log('video started');
+    // });
+    //
+    // contents.on('media-paused', () => {
+    //     console.log('video paused');
+    // });
+
+    // contents.on('login', (e, request, authInfo, callback) => {
+    //     console.log('logging in:');
+    //     callback('user', 'passwd');
+    // });
+
+    // contents.on('did-navigate', (e, url, statusCode, message) => {
+    //     console.log(`Navigate to: ${url}, with response code: ${statusCode}`);
+    //     console.log(message);
+    // });
+    // contents.on('before-input-event', (e, input) => {
+    //     console.log(`${input.key} : ${input.type}`);
+    // });
+
+    // contents.on('new-window', (e, url) => {
+    //     e.preventDefault();
+    //     console.log(`creating new window for ${url}`);
+    // });
+
+    // contents.on('did-finish-load', () => {
+    //     console.log('content fully loaded');
+    // });
+
+    // contents.on('dom-ready', () => {
+    //     console.log('DOM ready');
+    // });
     // mainWindow.loadURL('http://busation.ru');
 
     // secondWindow.loadFile('index2.html');
@@ -55,9 +102,9 @@ function createWindow() {
 
     // Open DevTools - Remove for PRODUCTION!
     // mainWindow.webContents.openDevTools();
-    mainWindow.on('focus', () => {
-        console.log('main window focused');
-    });
+    // mainWindow.on('focus', () => {
+    //     console.log('main window focused');
+    // });
 
     // secondWindow.on('focus', () => {
     //     console.log('second window focused');
@@ -93,21 +140,21 @@ app.on('ready', () => {
     createWindow();
 });
 
-app.on('before-quit', e => {
-    // console.log('prevent from quiting');
-    // e.preventDefault();
-    // app.quit();
-});
+// app.on('before-quit', e => {
+//     // console.log('prevent from quiting');
+//     // e.preventDefault();
+//     // app.quit();
+// });
 
-app.on('browser-window-blur', () => {
-    console.log('unfocus');
-    // setTimeout(app.quit, 3000);
-    // setTimeout(app.hide, 3000);
-});
+// app.on('browser-window-blur', () => {
+//     console.log('unfocus');
+//     // setTimeout(app.quit, 3000);
+//     // setTimeout(app.hide, 3000);
+// });
 
-app.on('browser-window-focus', () => {
-    console.log('focus');
-});
+// app.on('browser-window-focus', () => {
+//     console.log('focus');
+// });
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on('window-all-closed', () => {

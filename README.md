@@ -11,3 +11,7 @@ chrome://inspect/
 ### Restart from console
 
 `rs`
+
+### Execute JavaScript
+
+contents.executeJavaScript(code[, userGesture])
