@@ -2,7 +2,7 @@
 
 ### To rebuild bycript run:
 
-` ./node_modules/.bin/electron-rebuild`
+`./node_modules/.bin/electron-rebuild`
 
 ### Inspect
 
@@ -27,4 +27,49 @@ BrowserWindow({
   webPreferences: {
     partitiond: 'persist:part1'
 })
+```
+
+```
+session.clearStorageData()
+```
+
+### Cookie
+
+```javascript
+const ses = session.defaultSession;
+
+ses.cookies.get({}, (err, cookies) => {
+    console.log(cookies);
+});
+```
+
+```javascript
+let cookie = {
+    url: 'https://my.site',
+    name: 'cookie1',
+    value: 'electron',
+    expirationDate: 1613852855
+};
+
+ses.cookies.set(cookie, err => {
+    console.log('cookie1 set');
+});
+```
+
+`session = true` property, means the cookie only valid for session
+
+#### read specific cookie
+
+```javascript
+const ses = session.defaultSession;
+
+ses.cookies.get({ name: 'cookie1' }, (err, cookies) => {
+    console.log(cookies);
+});
+```
+
+#### remove cookie
+
+```javascript
+ses.cookies.remove('https://my.site', 'cookie1');
 ```
