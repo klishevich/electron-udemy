@@ -1,7 +1,13 @@
 # Master Electron - Course Code
 
-To rebuild bycript run:
+### To rebuild bycript run:
+
 ` ./node_modules/.bin/electron-rebuild`
 
-Inspect
+### Inspect
+
 chrome://inspect/
+
+### Restart from console
+
+`rs`

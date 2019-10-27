@@ -26,22 +26,22 @@ function createWindow() {
         titleBarStyle: 'hidden'
     });
 
-    console.log('mainWindow.id', mainWindow.id);
+    // console.log('mainWindow.id', mainWindow.id);
 
-    secondWindow = new BrowserWindow({
-        width: 500,
-        height: 300,
-        webPreferences: { nodeIntegration: true },
-        show: true
-    });
+    // secondWindow = new BrowserWindow({
+    //     width: 500,
+    //     height: 300,
+    //     webPreferences: { nodeIntegration: true },
+    //     show: true
+    // });
 
     // Load index.html into the new BrowserWindow
     mainWindow.loadFile('index.html');
     // mainWindow.loadURL('http://busation.ru');
 
-    secondWindow.loadFile('index2.html');
+    // secondWindow.loadFile('index2.html');
 
-    console.log(BrowserWindow.getAllWindows());
+    // console.log(BrowserWindow.getAllWindows());
 
     // Open DevTools - Remove for PRODUCTION!
     // mainWindow.webContents.openDevTools();
@@ -49,18 +49,18 @@ function createWindow() {
         console.log('main window focused');
     });
 
-    secondWindow.on('focus', () => {
-        console.log('second window focused');
-    });
+    // secondWindow.on('focus', () => {
+    //     console.log('second window focused');
+    // });
 
     // Listen for window being closed
     mainWindow.on('closed', () => {
         mainWindow = null;
     });
 
-    secondWindow.on('closed', () => {
-        secondWindow = null;
-    });
+    // secondWindow.on('closed', () => {
+    //     secondWindow = null;
+    // });
 
     // once - discard trigger after once
     // mainWindow.once('ready-to-show', () => {
