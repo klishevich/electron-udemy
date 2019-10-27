@@ -93,3 +93,11 @@ mainWindow.webContens.on('did-finish-load', () => {
 dialog.showSaveDialog
 
 dialog.showMessageBox
+
+### Global Shortcut Module
+
+```javascript
+globalShortcut.register('G', () => {
+    console.log('G pressed');
+});
+```
