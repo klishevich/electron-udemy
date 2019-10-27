@@ -105,3 +105,11 @@ globalShortcut.register('G', () => {
 ### Menu
 
 Menu.buildFromTemplate
+
+### Context Menu
+
+```javascript
+mainWindow.webContents.on('context-menu', e => {
+    contextMenu.popup();
+});
+```
