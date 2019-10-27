@@ -17,6 +17,8 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1000,
         height: 600,
+        minWidth: 300,
+        minHeight: 150,
         webPreferences: { nodeIntegration: true },
         show: true,
         backgroundColor: '#2C92F9',
@@ -24,13 +26,13 @@ function createWindow() {
         titleBarStyle: 'hidden'
     });
 
+    console.log('mainWindow.id', mainWindow.id);
+
     secondWindow = new BrowserWindow({
         width: 500,
         height: 300,
         webPreferences: { nodeIntegration: true },
-        parent: mainWindow,
-        modal: true,
-        show: false
+        show: true
     });
 
     // Load index.html into the new BrowserWindow
@@ -39,8 +41,17 @@ function createWindow() {
 
     secondWindow.loadFile('index2.html');
 
+    console.log(BrowserWindow.getAllWindows());
+
     // Open DevTools - Remove for PRODUCTION!
     // mainWindow.webContents.openDevTools();
+    mainWindow.on('focus', () => {
+        console.log('main window focused');
+    });
+
+    secondWindow.on('focus', () => {
+        console.log('second window focused');
+    });
 
     // Listen for window being closed
     mainWindow.on('closed', () => {
