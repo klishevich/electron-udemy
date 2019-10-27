@@ -1,5 +1,5 @@
 // Modules
-const { app, BrowserWindow, webContents } = require('electron');
+const { app, BrowserWindow, webContents, session } = require('electron');
 const windowStateKeeper = require('electron-window-state');
 
 console.log('checking ready', app.isReady());
@@ -34,6 +34,12 @@ function createWindow() {
         // titleBarStyle: 'hidden'
     });
 
+    const ses = mainWindow.webContents.session;
+    console.log('ses', ses);
+    const defaultSession = session.defaultSession;
+
+    console.log(Object.is(ses, defaultSession));
+
     mainWindowState.manage(mainWindow);
 
     // console.log('mainWindow.id', mainWindow.id);
@@ -53,13 +59,13 @@ function createWindow() {
     // console.log('contents 1', contents);
     // console.log('contents 2', webContents.getAllWebContents());
 
-    contents.on('context-menu', (e, params) => {
-        // console.log(`Context menu opened on:${params.mediaType} at x:${params.x}, y:${params.y}`);
-        console.log(`User selected text: ${params.selectionText}`);
-        console.log(`Can be copied: ${params.editFlags.canCopy}`);
-        const selectedText = params.selectionText;
-        contents.executeJavaScript(`alert("${selectedText}")`);
-    });
+    // contents.on('context-menu', (e, params) => {
+    //     // console.log(`Context menu opened on:${params.mediaType} at x:${params.x}, y:${params.y}`);
+    //     console.log(`User selected text: ${params.selectionText}`);
+    //     console.log(`Can be copied: ${params.editFlags.canCopy}`);
+    //     const selectedText = params.selectionText;
+    //     contents.executeJavaScript(`alert("${selectedText}")`);
+    // });
 
     // contents.on('media-started-playing', () => {
     //     console.log('video started');
@@ -101,7 +107,7 @@ function createWindow() {
     // console.log(BrowserWindow.getAllWindows());
 
     // Open DevTools - Remove for PRODUCTION!
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
     // mainWindow.on('focus', () => {
     //     console.log('main window focused');
     // });

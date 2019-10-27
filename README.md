@@ -15,3 +15,16 @@ chrome://inspect/
 ### Execute JavaScript
 
 contents.executeJavaScript(code[, userGesture])
+
+### Session
+
+```$xslt
+session.fromPartition('persist:part1')
+```
+
+```$xslt
+BrowserWindow({
+  webPreferences: {
+    partitiond: 'persist:part1'
+})
+```
