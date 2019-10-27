@@ -1,17 +1,29 @@
 // Modules
-const { app, BrowserWindow, webContents, session } = require('electron');
+const { app, BrowserWindow, webContents, session, Menu, MenuItem } = require('electron');
 const windowStateKeeper = require('electron-window-state');
-
-console.log('checking ready', app.isReady());
-
-setTimeout(() => {
-    console.log('checking ready', app.isReady());
-}, 2000);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 let secondWindow;
+
+const mainMenu = new Menu();
+
+const menuItem1 = new MenuItem({
+    label: 'Electron',
+    submenu: [
+        {
+            label: 'Greet',
+            click: () => {
+                console.log('Hello from menu');
+            },
+            accelerator: 'Shift+Alt+K'
+        },
+        { label: 'DevTools', role: 'toggleDevTools' }
+    ]
+});
+
+mainMenu.append(menuItem1);
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
@@ -61,6 +73,8 @@ function createWindow() {
 
     // Load index.html into the new BrowserWindow
     mainWindow.loadFile('index.html');
+
+    Menu.setApplicationMenu(mainMenu);
     // mainWindow.loadURL('https://httpbin.org/basic-auth/user/passwd');
 
     let contents = mainWindow.webContents;

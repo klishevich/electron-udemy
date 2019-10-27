@@ -101,3 +101,7 @@ globalShortcut.register('G', () => {
     console.log('G pressed');
 });
 ```
+
+### Menu
+
+Menu.buildFromTemplate
