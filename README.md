@@ -163,7 +163,7 @@ webFrame.getResourceUsage();
 process.type - where from I accessed the process (rendered/ browser)
 process.mas, process.windowsStore
 
-process.cpuUsage 
+process.cpuUsage
 
 process.hang()
 
@@ -183,5 +183,26 @@ You may use the module to create window with half of the display width.
 
 ## Shell
 
-- open url
+-   open url
 
+## Native Image
+
+```javascript
+const { nativeImage, remote } = require('electron');
+const splash = nativeImage.createFromPath(`${__dirname}/splash.png`);
+console.log(splash.getSize());
+
+const saveToDesktop = (data, ext) => {
+    let desktopPath = remote.app.getPath('desktop');
+    fs.writeFile(`${desktopPath}/splash.${ext}`, data, console.log);
+};
+// Convert to different formats
+
+let pngSplash = splash.toPNG();
+saveToDesktop(pngSplash, 'png');
+
+// to insert into <img src="" id="preview"/>
+const splashUrl = splash.resize({width: 100, height: 100}).toDataURL();
+document.getElementById("preview").src = splashUrl
+
+```
