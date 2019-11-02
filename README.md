@@ -269,6 +269,4 @@ new Notification(title, options);
 
 ### Preload Scripts (preload.js)
 
-### Progress Bar
-
-
+### Progress Bar!
