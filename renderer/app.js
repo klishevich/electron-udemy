@@ -1,16 +1,50 @@
-const { remote } = require('electron');
+const { ipcRenderer } = require('electron');
 
-const self = remote.getCurrentWindow();
+const showModal = document.getElementById('show-modal');
+const closeModal = document.getElementById('close-modal');
+const modal = document.getElementById('modal');
+const addItem = document.getElementById('add-item');
+const itemUrl = document.getElementById('url');
 
-let progress = 0.01;
-
-let progressInterval = setInterval(() => {
-    self.setProgressBar(progress);
-
-    if (progress <= 1) {
-        progress += 0.01;
+const toggleModalButtons = () => {
+    if (addItem.disabled === true) {
+        addItem.disabled = false;
+        addItem.style.opacity = 1;
+        addItem.innerText = 'Add Item';
+        closeModal.style.display = 'inline';
     } else {
-        self.setProgressBar(-1);
-        clearInterval(progressInterval);
+        addItem.disabled = true;
+        addItem.style.opacity = 0.5;
+        addItem.innerText = 'Adding...';
+        closeModal.style.display = 'none';
     }
-}, 50);
+};
+
+showModal.addEventListener('click', e => {
+    modal.style.display = 'flex';
+    itemUrl.focus();
+});
+
+closeModal.addEventListener('click', e => {
+    modal.style.display = 'none';
+});
+
+addItem.addEventListener('click', e => {
+    if (itemUrl.value) {
+        ipcRenderer.send('new-item', itemUrl.value);
+        toggleModalButtons();
+    }
+});
+
+ipcRenderer.on('new-item-success', (e, newItem) => {
+    console.log(newItem);
+    toggleModalButtons();
+    modal.style.display = 'none';
+    itemUrl.value = '';
+});
+
+itemUrl.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+        addItem.click();
+    }
+});
