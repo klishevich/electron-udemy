@@ -6,25 +6,23 @@
         <title>Hello World!</title>
         <style media="screen">
             body {
-                background-color: #2c92f9;
-                height: 100%;
-                /*user-select: none;*/
-                -webkit-app-region: drag;
-                padding-top: 20px;
             }
         </style>
     </head>
     <body>
-        <button id="test-button">Test button</button>
-        <br/>
-        <button id="quit">Quit</button>
-        <br/>
-        <button id="ipc-button">Send</button>
-        <br/>
-        <button id="ipc-sync">Send Sync</button>
         <script>
-            // You can also require other files to run in this process
-            require('./renderer.js');
+            const { remote } = require('electron');
+            const self = remote.getCurrentWindow();
+            setTimeout(() => {
+                let notification = new Notification('Election App Notification', {
+                    body: 'Some notification!'
+                });
+                notification.onclick = e => {
+                    if (!self.isVisible()) {
+                        self.show();
+                    }
+                };
+            }, 2000);
         </script>
     </body>
 </html>

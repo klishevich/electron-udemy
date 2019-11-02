@@ -169,7 +169,7 @@ process.hang()
 
 process.crash() - we can reload when crashed
 
-## Screen
+### Screen
 
 in renderer
 
@@ -181,11 +181,11 @@ screen.getAllDisplays()
 
 You may use the module to create window with half of the display width.
 
-## Shell
+### Shell
 
 -   open url
 
-## Native Image
+### Native Image
 
 ```javascript
 const { nativeImage, remote } = require('electron');
@@ -202,15 +202,14 @@ let pngSplash = splash.toPNG();
 saveToDesktop(pngSplash, 'png');
 
 // to insert into <img src="" id="preview"/>
-const splashUrl = splash.resize({width: 100, height: 100}).toDataURL();
-document.getElementById("preview").src = splashUrl
-
+const splashUrl = splash.resize({ width: 100, height: 100 }).toDataURL();
+document.getElementById('preview').src = splashUrl;
 ```
 
-## Clipboard
+### Clipboard
 
 ```javascript
-const {clipboard} = require('electron');
+const { clipboard } = require('electron');
 clipboard.readText();
 clipboard.writeText('ddddd');
 
@@ -218,3 +217,52 @@ clipboard.writeText('ddddd');
 
 // for Text
 ```
+
+### Offscreen rendering
+
+```javascript
+mainWindow = new BrowserWindow({
+    width: 1000,
+    height: 800,
+    show: false,
+    webPreferences: {
+        nodeIntegration: true,
+        offscreen: true
+    }
+});
+
+let i = 0;
+mainWindow.webContents.on('paint', (e, dirty, image) => {
+    i++;
+    let screenshot = image.toPNG();
+    fs.writeFile(app.getPath('desktop') + `/screenshot_${i}.png`, screenshot, console.log);
+});
+```
+
+### Network detection
+
+#### Network conditions -> Network throttling -> Online/Offline
+
+```javascript
+const status = navigator.online ? 'online' : 'offline';
+
+// event listener
+const setStatus = status => {
+    const statusNode = document.getElementById('status');
+    statusNode.innerText = status ? 'online' : 'offline';
+};
+
+window.addEventListener('online', e => {
+    setStatus(true);
+});
+
+window.addEventListener('offline', e => {
+    setStatus(false);
+});
+```
+
+### Notifications
+
+HTML5
+
+new Notification(title, options);
