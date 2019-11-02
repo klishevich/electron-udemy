@@ -157,3 +157,31 @@ webFrame.getResourceUsage();
 ### desktopCapturer
 
 ## IPC Inter-Process Communication
+
+## Shared API. Process
+
+process.type - where from I accessed the process (rendered/ browser)
+process.mas, process.windowsStore
+
+process.cpuUsage 
+
+process.hang()
+
+process.crash() - we can reload when crashed
+
+## Screen
+
+in renderer
+
+window.screen
+
+electron.screen
+
+screen.getAllDisplays()
+
+You may use the module to create window with half of the display width.
+
+## Shell
+
+- open url
+

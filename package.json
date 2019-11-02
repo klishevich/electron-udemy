@@ -4,6 +4,8 @@
   "description": "Master Electron Course Code",
   "main": "main.js",
   "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "start": "nodemon --exec 'electron .'",
     "inspect": "electron --inspect-brk=5858 .",
     "start2": "electron .",
@@ -16,10 +18,32 @@
     "Master Electron",
     "demo"
   ],
+  "build": {
+    "appId": "your.id",
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "runAfterFinish": true,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "identity": null,
+      "category": "public.app-category.utilities"
+    }
+  },
   "author": "GitHub, Stackacademytv",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^6.1.2",
+    "electron-builder": "^21.2.0",
     "electron-rebuild": "^1.8.6",
     "nodemon": "^1.19.2",
     "prettier": "^1.18.2"
