@@ -206,3 +206,15 @@ const splashUrl = splash.resize({width: 100, height: 100}).toDataURL();
 document.getElementById("preview").src = splashUrl
 
 ```
+
+## Clipboard
+
+```javascript
+const {clipboard} = require('electron');
+clipboard.readText();
+clipboard.writeText('ddddd');
+
+// for HTML
+
+// for Text
+```
