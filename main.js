@@ -10,8 +10,8 @@ let mainWindow;
 // Create a new BrowserWindow when `app` is ready
 function createWindow() {
     let mainWindowState = windowStateKeeper({
-        defaultWidth: 1000,
-        defaultHeight: 600
+        defaultWidth: 500,
+        defaultHeight: 650
     });
 
     mainWindow = new BrowserWindow({
@@ -19,16 +19,17 @@ function createWindow() {
         y: mainWindowState.y,
         width: mainWindowState.width,
         height: mainWindowState.height,
-        minWidth: 300,
-        minHeight: 150,
+        minWidth: 350,
+        maxWidth: 650,
+        minHeight: 300,
         webPreferences: {
             nodeIntegration: true
         },
         show: true
     });
 
+    mainWindow.loadFile('renderer/main.html');
     mainWindowState.manage(mainWindow);
-    mainWindow.loadFile('index.html');
     mainWindow.webContents.openDevTools();
 
     // Listen for window being closed
