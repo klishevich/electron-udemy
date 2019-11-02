@@ -1,10 +1,25 @@
 const { ipcRenderer } = require('electron');
+const items = require('./items');
 
 const showModal = document.getElementById('show-modal');
 const closeModal = document.getElementById('close-modal');
 const modal = document.getElementById('modal');
 const addItem = document.getElementById('add-item');
 const itemUrl = document.getElementById('url');
+const search = document.getElementById('search');
+
+search.addEventListener('keyup', e => {
+    Array.from(document.getElementsByClassName('read-item')).forEach(item => {
+        const hasMatch = item.innerText.toLocaleLowerCase().includes(search.value);
+        item.style.display = hasMatch ? 'flex' : 'none';
+    });
+});
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        items.changeSelection(e.key);
+    }
+});
 
 const toggleModalButtons = () => {
     if (addItem.disabled === true) {
@@ -37,7 +52,7 @@ addItem.addEventListener('click', e => {
 });
 
 ipcRenderer.on('new-item-success', (e, newItem) => {
-    console.log(newItem);
+    items.addItem(newItem, true);
     toggleModalButtons();
     modal.style.display = 'none';
     itemUrl.value = '';
