@@ -266,3 +266,6 @@ window.addEventListener('offline', e => {
 HTML5
 
 new Notification(title, options);
+
+### Preload Scripts (preload.js)
+

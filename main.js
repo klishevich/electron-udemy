@@ -50,7 +50,11 @@ function createWindow() {
         height: mainWindowState.height,
         minWidth: 300,
         minHeight: 150,
-        webPreferences: { nodeIntegration: true },
+        webPreferences: {
+            nodeIntegration: false,
+            contextIsolation: false,
+            preload: __dirname + '/preload.js'
+        },
         show: true,
         backgroundColor: '#2C92F9'
         // frame: false,
