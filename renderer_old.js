@@ -17,8 +17,6 @@ button.addEventListener('click', e => {
         height: 200
     });
     secWin.loadFile('index.html');
-
-    console.log(remote.getGlobal('myVar'));
 });
 
 const button2 = document.getElementById('quit');

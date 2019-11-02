@@ -10,35 +10,8 @@
         </style>
     </head>
     <body>
-        <h1>Electon App</h1>
-        <div>
-            Node.js
-            <strong
-                ><script>
-                    document.write(versions.node);
-                </script></strong
-            >
-        </div>
-        <div>
-            Electron
-            <strong
-                ><script>
-                    document.write(versions.electron);
-                </script></strong
-            >
-        </div>
-
-        <br /><label for="content">Enter Text</label><textarea id="content" rows="8" cols="80"></textarea> <br /><button
-            id="save"
-            onclick="saveText()"
-        >
-            Save Content
-        </button>
+        <h1>Progress Bar</h1>
         <script>
-            const saveText = e => {
-                const text = document.getElementById('content').value;
-                writeToFile(text);
-            };
         </script>
     </body>
 </html>
