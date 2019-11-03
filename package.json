@@ -1,6 +1,6 @@
 {
   "name": "Readit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Master Electron Project",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "reset": "git reset --hard",
     "electron-rebuild": "electron-rebuild",
     "build-all": "electron-builder -mwl",
-    "release": "electron-builder -mw -p 'onTagOrDraft'",
+    "release": "electron-builder -mw -p always",
     "build-mac": "electron-builder --mac"
   },
   "repository": "https://github.com/klishevich/electron-udemy",
@@ -26,7 +26,10 @@
     "publish": "github",
     "mac": {
       "category": "public.app-category.productivity",
-      "target": "dmg"
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
       "target": "nsis"
@@ -44,6 +47,8 @@
     "prettier": "^1.18.2"
   },
   "dependencies": {
+    "electron-log": "^3.0.8",
+    "electron-updater": "^4.2.0",
     "electron-window-state": "^5.0.3"
   }
 }
