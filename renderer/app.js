@@ -8,6 +8,25 @@ const addItem = document.getElementById('add-item');
 const itemUrl = document.getElementById('url');
 const search = document.getElementById('search');
 
+window.newItem = () => {
+    showModal.click();
+};
+
+window.openItem = () => {
+    items.open();
+};
+
+window.deleteItem = () => {
+    let selectemItem = items.getSelectedItem();
+    items.delete(selectemItem.index);
+};
+
+window.openItemNative = items.openNative;
+
+window.searchItems = () => {
+    search.focus();
+};
+
 search.addEventListener('keyup', e => {
     Array.from(document.getElementsByClassName('read-item')).forEach(item => {
         const hasMatch = item.innerText.toLocaleLowerCase().includes(search.value);

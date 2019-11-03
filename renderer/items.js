@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { shell } = require('electron');
 
 const items = document.getElementById('items');
 
@@ -9,30 +10,66 @@ fs.readFile(`${__dirname}/reader.js`, (err, data) => {
 
 exports.storage = JSON.parse(localStorage.getItem('readit-items')) || [];
 
+window.addEventListener('message', e => {
+    this.delete(e.data.itemIndex);
+    // console.log(1111, e.data.itemIndex);
+    e.source.close();
+});
+
+exports.delete = itemIndex => {
+    console.log(2222, itemIndex, Array.from(items.childNodes));
+    // items.removeChild(items.childNodes[itemIndex]);
+    // this.storage.splice(itemIndex, 1);
+    // this.save();
+    // if (this.storage.length) {
+    //     let newSelectedItemIndex = itemIndex === 0 ? 0 : itemIndex - 1;
+    //     document.getElementsByClassName('read-item')[newSelectedItemIndex].classList.add('selected');
+    // }
+};
+
+exports.getSelectedItem = () => {
+    const currentItem = document.getElementsByClassName('read-item selected')[0];
+    // I dont know why it is -1 not 0
+    let itemIndex = -1;
+    let child = currentItem.previousSibling;
+    while (child !== null) {
+        child = child.previousSibling;
+        itemIndex++;
+    }
+    return { node: currentItem, index: itemIndex };
+};
+
 exports.save = () => {
     localStorage.setItem('readit-items', JSON.stringify(this.storage));
 };
 
 exports.select = e => {
-    document.getElementsByClassName('read-item selected')[0].classList.remove('selected');
+    this.getSelectedItem().node.classList.remove('selected');
     e.currentTarget.classList.add('selected');
 };
 
 exports.changeSelection = direction => {
-    const currentItem = document.getElementsByClassName('read-item selected')[0];
-    if (direction === 'ArrowUp' && currentItem.previousSibling) {
-        currentItem.classList.remove('selected');
-        currentItem.previousSibling.classList.add('selected');
-    } else if (direction === 'ArrowDown' && currentItem.nextSibling) {
-        currentItem.classList.remove('selected');
-        currentItem.nextSibling.classList.add('selected');
+    const currentItemNode = this.getSelectedItem().node;
+    if (direction === 'ArrowUp' && currentItemNode.previousSibling) {
+        currentItemNode.classList.remove('selected');
+        currentItemNode.previousSibling.classList.add('selected');
+    } else if (direction === 'ArrowDown' && currentItemNode.nextSibling) {
+        currentItemNode.classList.remove('selected');
+        currentItemNode.nextSibling.classList.add('selected');
     }
+};
+
+exports.openNative = () => {
+    if (!this.storage.length) return;
+
+    let selectedItem = this.getSelectedItem();
+    shell.openExternal(selectedItem.node.dataset.url);
 };
 
 exports.open = () => {
     if (!this.storage.length) return;
-    const selectedItem = document.getElementsByClassName('read-item selected')[0];
-    const contentURL = selectedItem.dataset.url;
+    const selectedItem = this.getSelectedItem();
+    const contentURL = selectedItem.node.dataset.url;
     const readerWin = window.open(
         contentURL,
         '',
@@ -47,7 +84,7 @@ exports.open = () => {
     `
     );
 
-    readerWin.eval(readerJS);
+    readerWin.eval(readerJS.replace('{{index}}', selectedItem.index));
 };
 
 exports.addItem = (item, isNew = false) => {

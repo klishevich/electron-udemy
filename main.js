@@ -1,7 +1,6 @@
 // Modules
 const { app, BrowserWindow, ipcMain } = require('electron');
 const windowStateKeeper = require('electron-window-state');
-require('./menu');
 const readItem = require('./readItem');
 
 // Keep a global reference of the window object, if you don't, the window will
