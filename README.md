@@ -1,4 +1,6 @@
-# Master Electron - Course Code
+# Project Readit
+
+This is tutorial electron project
 
 ## Main Proccess
 
