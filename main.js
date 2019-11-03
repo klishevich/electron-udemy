@@ -36,7 +36,7 @@ function createWindow() {
 
     mainWindow.loadFile('renderer/main.html');
     mainWindowState.manage(mainWindow);
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
     // Listen for window being closed
     mainWindow.on('closed', () => {

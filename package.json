@@ -1,45 +1,40 @@
 {
-  "name": "master-electron",
+  "name": "Readit",
   "version": "1.0.0",
-  "description": "Master Electron Course Code",
+  "description": "Master Electron Project",
   "main": "main.js",
   "scripts": {
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
     "start": "nodemon --exec 'electron .'",
-    "inspect": "electron --inspect-brk=5858 .",
     "start2": "electron .",
     "reset": "git reset --hard",
-    "electron-rebuild": "electron-rebuild"
+    "electron-rebuild": "electron-rebuild",
+    "build-all": "electron-builder -mwl",
+    "release": "electron-builder -mw -p onTagOrDraft",
+    "build-mac": "electron-builder --mac"
   },
   "repository": "https://github.com/stackacademytv/master-electron",
+  "homepage": "https://github.com/stackacademytv/master-electron",
   "keywords": [
     "Electron",
     "Master Electron",
     "demo"
   ],
+  "author": "klishevich",
   "build": {
-    "appId": "your.id",
-    "win": {
-      "target": [
-        "nsis"
-      ]
-    },
-    "nsis": {
-      "runAfterFinish": true,
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
-    },
+    "appId": "ru.codingbootcamp.readit",
+    "copyright": "Сopyright 2019 Codingbootcamp.ru",
+    "publish": "github",
     "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "identity": null,
-      "category": "public.app-category.utilities"
+      "category": "public.app-category.productivity",
+      "target": "dmg"
+    },
+    "win": {
+      "target": "zip"
+    },
+    "linux": {
+      "category": "Utility"
     }
   },
-  "author": "GitHub, Stackacademytv",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^6.1.2",
