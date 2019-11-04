@@ -25,4 +25,20 @@ module.exports = () => {
         );
         //
     });
+
+    autoUpdater.on('update-downloaded', () => {
+        dialog.showMessageBox(
+            {
+                type: 'info',
+                title: 'Update ready',
+                message: 'Install and restart now?',
+                buttons: ['Yes', 'Later']
+            },
+            buttonIndex => {
+                if (buttonIndex === 0) {
+                    autoUpdater.quitAndInstall(false, true);
+                }
+            }
+        );
+    });
 };

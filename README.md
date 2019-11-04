@@ -8,6 +8,19 @@ on Linux: ~/.config/<app name>/log.log
 on macOS: ~/Library/Logs/<app name>/log.log
 on Windows: %USERPROFILE%\AppData\Roaming\<app name>\log.log
 
+## Touch bar
+
+```javascript
+mainWindow.webContents.insertCSS(`body{backgroung-color:${color};}`);
+
+// resize main window
+val => {
+    mainWindow.setSize(val, val, true);
+};
+```
+
+# API Tutorial
+
 ## Main Proccess
 
 ### To rebuild bycript run:
