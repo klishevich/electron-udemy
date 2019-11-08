@@ -4,7 +4,7 @@ const windowStateKeeper = require('electron-window-state');
 require('./menu');
 
 // for notifications
-app.setAppUserModelId('Electron Udemy App');
+app.setAppUserModelId('ru.busation.electron_udemy');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
