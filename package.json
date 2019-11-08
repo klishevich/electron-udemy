@@ -1,7 +1,8 @@
 {
-  "name": "master-electron",
-  "version": "1.0.0",
-  "description": "Master Electron Course Code",
+  "name": "electron_udemy",
+  "productName": "Electron Udemy App",
+  "version": "1.1.1",
+  "description": "Electron Udemy App",
   "main": "main.js",
   "scripts": {
     "pack": "electron-builder --dir",
@@ -10,17 +11,21 @@
     "inspect": "electron --inspect-brk=5858 .",
     "start2": "electron .",
     "reset": "git reset --hard",
-    "electron-rebuild": "electron-rebuild"
+    "buildWin": "electron-builder build --win",
+    "publish": "electron-builder -w -p always",
+    "electron-rebuild": "electron-rebuild",
+    "postinstall": "electron-builder install-app-deps"
   },
-  "repository": "https://github.com/stackacademytv/master-electron",
+  "repository": "https://github.com/klishevich/electron-udemy",
   "keywords": [
     "Electron",
     "Master Electron",
     "demo"
   ],
   "build": {
-    "appId": "your.id",
+    "appId": "ru.busation.electron_udemy",
     "win": {
+      "icon": "logo3a.png",
       "target": [
         "nsis"
       ]
@@ -28,7 +33,8 @@
     "nsis": {
       "runAfterFinish": true,
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "createStartMenuShortcut": true
     },
     "mac": {
       "target": [

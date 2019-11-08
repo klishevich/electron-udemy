@@ -16,7 +16,8 @@ let progressInterval = setInterval(() => {
 }, 50);
 
 let myNotification = new Notification('Title', {
-    body: 'Lorem Ipsum Dolor Sit Amet'
+    body: 'Lorem Ipsum Dolor Sit Amet',
+    icon: './logo3a.png'
 });
 
 myNotification.onclick = () => {
