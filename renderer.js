@@ -15,11 +15,13 @@ let progressInterval = setInterval(() => {
     }
 }, 50);
 
-let myNotification = new Notification('Title', {
-    body: 'Lorem Ipsum Dolor Sit Amet',
-    icon: './logo3a.png'
-});
+setTimeout(() => {
+    let myNotification = new Notification('Message from RENDERER', {
+        body: 'Lorem Ipsum Dolor Sit AmetT',
+        icon: './logo3a.png'
+    });
 
-myNotification.onclick = () => {
-    console.log('Notification clicked');
-};
+    myNotification.onclick = () => {
+        console.log('RENDERER notification clicked');
+    };
+}, 7000);

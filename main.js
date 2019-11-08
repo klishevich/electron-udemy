@@ -1,6 +1,7 @@
 // Modules
-const { app, BrowserWindow, session, Menu, MenuItem, ipcMain } = require('electron');
+const { app, BrowserWindow, session, Menu, MenuItem, ipcMain, Notification } = require('electron');
 const windowStateKeeper = require('electron-window-state');
+const path = require('path');
 require('./menu');
 
 // for notifications
@@ -56,3 +57,21 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     if (mainWindow === null) createWindow();
 });
+
+// MESSAGE
+setTimeout(() => {
+    const logoIcon = path.join(__dirname, './logo3a.png');
+
+    const notific = new Notification({
+        title: 'Message from MAIN',
+        body: 'Lorem Ipsum Dolor Sit AmetT',
+        icon: logoIcon
+    });
+
+    notific.on('click', () => {
+        console.log('MAIN notification clicked');
+        // app.quit();
+    });
+
+    notific.show();
+}, 2000);
